@@ -49,7 +49,7 @@ Use this table to determine the documentation action before starting work.
 | New feature guide (scheduler feature, GPU optimization, topology, NUMA) | Load `docs/.agents/skills/runai-docs-feature-guide/SKILL.md` | `docs/platform-management/aiinitiatives/resources/topology-aware-scheduling/README.md` |
 | New CLI flag or command | Never edit `docs/reference/cli/runai/` — it is generated. | — |
 | New or changed API endpoint or field | Never edit `control-plane/infra/openapi/build/_build/` — the OpenAPI specs are generated. | — |
-| New or changed MCP server tool | Load `docs/.agents/skills/update-mcp-server-docs/SKILL.md` | `docs/installation-and-configuration/mcp-server.md` |
+| New or changed MCP server tool | Load `docs/.agents/skills/update-mcp-server-docs/SKILL.md` | `docs/agents/mcp-server/deploy.md` |
 | Installation flow, prerequisites/features, or installer config reference | Load `docs/.agents/skills/runai-docs-installation/SKILL.md` | `docs/installation-and-configuration/installation/guided-installation/README.md` |
 | New feature, enhancement, or behavior change with no dedicated skill above | See How to Approach Documentation Work above | — |
 
