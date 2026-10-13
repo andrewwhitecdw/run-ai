@@ -4,8 +4,8 @@ Local tracker for tiny documentation/factual bugs found by cross-checking prose
 against the repo. Records findings, evidence, the smallest fix for each, and
 upstream status.
 
-Legend: `[pr]` upstream PR open · `[filed]` upstream issue exists · `[pending]`
-not filed, not fixed.
+Legend: `[pr]` upstream PR open · `[fork]` fixed on a fork branch, no upstream PR
+yet · `[filed]` upstream issue exists · `[pending]` not filed, not fixed.
 
 ## Already handled
 
@@ -14,10 +14,22 @@ not filed, not fixed.
 | [pr] | CONTRIBUTING.md:143 — CODEOWNERS listed in CI Layer 1 lint (deleted one word). Filed upstream as [#2457](https://github.com/dsx-ai-factory/run-ai/issues/2457). Maintainer opened #2490; we took up their offer to send ours instead → PR [#2495](https://github.com/dsx-ai-factory/run-ai/pull/2495) (fixes #2457 + #2460, branch `docs/layer1-ci-list`). |
 | [pr] | CONTRIBUTING.md:143 — "CodeQL diff scan" claimed on fork PRs; no CodeQL job in Layer 1 CI → [#2460](https://github.com/dsx-ai-factory/run-ai/issues/2460). Covered by PR #2495. |
 | [pr] | CONTRIBUTING.md:208 — `.github/CODEOWNERS` and `docs/CODEOWNERS` don't exist; Step 4 omits `validate` target → [#2461](https://github.com/dsx-ai-factory/run-ai/issues/2461). Covered by PR [#2496](https://github.com/dsx-ai-factory/run-ai/pull/2496) (branch `docs/contributing-codeowners-step4`). |
+| [pr] | MAINTAINERS.md `/test` → `/ok-to-test` and `backport/v2.X` → `backport-<branch>` → upstream PR [#2497](https://github.com/dsx-ai-factory/run-ai/pull/2497) (branch `docs/maintainers-cmd-and-label`). Opened just before the "fork only" instruction. |
 
 Note: fork main still carries the one-word fix `4bf8c161c`, now superseded by
 PR #2495's fuller rewrite — expect a trivial conflict when syncing fork main
 after #2495 merges; drop the fork commit then.
+
+## Fixed on fork branches, upstream PRs intentionally not opened yet
+
+User instruction (2026-10-13): keep these on the fork only for now. Each branch
+is cut from upstream `main` and DCO-signed, ready to `gh pr create` on request.
+
+| Branch | Commit | Contents |
+|---|---|---|
+| `docs/service-readme-corrections` | `b1f74526d` | Nine READMEs: bff dead `pkg/client/README.md` links; datavolumes phantom `make coverage`; metrics-exporter phantom `make clean` + false docker-image claim; anyworkload missing `restartrules`/`nodeaffinity` plugins and phantom `make docker-build` (→ `local-deploy`); Go 1.26→1.27 in notifications-service, agent, cluster-sync; runai-chart dep table (kai `v0.0.3`→`v0.18.4`, karta source `/karta` dropped); runai-mcp-server `make docker` → `make docker-build`. |
+| `docs/cruft-cleanup` | `c273f6bc4` | CLAUDE.md: 4 dead index links removed (redoc, git-sync, valkey, provisioner-service), notifications-service added; schema-validation README `GO_VERSION` 1.21→1.24.6; bug-report template `kubectl version --short`→`kubectl version`; fern-docs-ci stale NON-BLOCKING comment deleted; runai-cli review instructions fake `auth-client`/`common/logging` examples repointed to real modules; skills/README missing `runai-diagnose-failed-workload` added; local-dev.md counts 25+25/~50 → 23+19/over 40 and false crd-upgrader "no Go source" claim removed. |
+| `docs/dev-docs-small-fixes` | `9d92329f1` | docs/AGENTS.md MCP reference → `docs/agents/mcp-server/deploy.md`; external-dependencies.md karta source `/karta` dropped; services.md nonexistent oauth2-proxy row dropped. |
 
 ## Highest-value tiny fixes (one-liners, verified)
 
