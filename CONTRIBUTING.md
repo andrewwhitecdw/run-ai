@@ -140,7 +140,7 @@ Run:ai accepts pull requests targeting `main` or the live release branch (today:
 We split CI into two layers:
 
 - **Layer 1: Fast, automatic, no secrets.**
-  - Runs on every fork PR as soon as it is opened: DCO check, lint (Go, Helm, CODEOWNERS, workflows), CodeQL diff scan, govulncheck.
+  - Runs on every fork PR as soon as it is opened: DCO check, lint (Go, Helm, workflows), CodeQL diff scan, govulncheck.
   - These checks post results back to your PR within a few minutes.
   - They are informational: they help you fix obvious issues before a maintainer looks at the PR, but they do not block merge by themselves.
 - **Layer 2: Full build and end-to-end tests, has secrets.**
