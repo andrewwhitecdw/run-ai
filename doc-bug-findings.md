@@ -1,19 +1,23 @@
 # Doc Bug Findings — run-ai monorepo
 
 Local tracker for tiny documentation/factual bugs found by cross-checking prose
-against the repo. Not authorized for upstream PRs yet — this file records
-findings, evidence, and the smallest fix for each.
+against the repo. Records findings, evidence, the smallest fix for each, and
+upstream status.
 
-Legend: `[fixed-fork]` committed on fork main (`4bf8c161c`) · `[filed]` upstream
-issue exists · `[pending]` not filed, not fixed.
+Legend: `[pr]` upstream PR open · `[filed]` upstream issue exists · `[pending]`
+not filed, not fixed.
 
 ## Already handled
 
 | Status | Item |
 |---|---|
-| [fixed-fork] | CONTRIBUTING.md:143 — CODEOWNERS listed in CI Layer 1 lint (deleted one word). Filed upstream as [#2457](https://github.com/dsx-ai-factory/run-ai/issues/2457). |
-| [filed] | CONTRIBUTING.md:143 — "CodeQL diff scan" claimed on fork PRs; no CodeQL job in Layer 1 CI → [#2460](https://github.com/dsx-ai-factory/run-ai/issues/2460). Needs maintainer decision (fix doc or add job). |
-| [filed] | CONTRIBUTING.md:208 — `.github/CODEOWNERS` and `docs/CODEOWNERS` don't exist; Step 4 omits `validate` target → [#2461](https://github.com/dsx-ai-factory/run-ai/issues/2461). |
+| [pr] | CONTRIBUTING.md:143 — CODEOWNERS listed in CI Layer 1 lint (deleted one word). Filed upstream as [#2457](https://github.com/dsx-ai-factory/run-ai/issues/2457). Maintainer opened #2490; we took up their offer to send ours instead → PR [#2495](https://github.com/dsx-ai-factory/run-ai/pull/2495) (fixes #2457 + #2460, branch `docs/layer1-ci-list`). |
+| [pr] | CONTRIBUTING.md:143 — "CodeQL diff scan" claimed on fork PRs; no CodeQL job in Layer 1 CI → [#2460](https://github.com/dsx-ai-factory/run-ai/issues/2460). Covered by PR #2495. |
+| [pr] | CONTRIBUTING.md:208 — `.github/CODEOWNERS` and `docs/CODEOWNERS` don't exist; Step 4 omits `validate` target → [#2461](https://github.com/dsx-ai-factory/run-ai/issues/2461). Covered by PR [#2496](https://github.com/dsx-ai-factory/run-ai/pull/2496) (branch `docs/contributing-codeowners-step4`). |
+
+Note: fork main still carries the one-word fix `4bf8c161c`, now superseded by
+PR #2495's fuller rewrite — expect a trivial conflict when syncing fork main
+after #2495 merges; drop the fork commit then.
 
 ## Highest-value tiny fixes (one-liners, verified)
 
