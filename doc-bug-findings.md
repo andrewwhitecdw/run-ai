@@ -165,3 +165,39 @@ confirm before dismissing or fixing.
 2. Triage the 276 security findings (likely mass-dismiss as naming heuristics)
 3. Test health focus (39.4%) — 3,436 auto-fixable items
 4. Install stylelint/pmd/eslint and rescan for complete coverage
+
+
+### Rescan — 2026-10-13 (after triage)
+
+Actions taken before rescanning:
+- Dismissed 240 security findings as false positive (237 `hardcoded_secret_name`
+  NAME heuristics + 3 `hardcoded_secret_value` documented fakes: test JWT in
+  `runai-cli/internal/auth/fake`, a Slack-format *error message*, and AWS's
+  example key in a comment).
+- Installed eslint v10.12.0 and stylelint 17.16.0 globally.
+
+| Metric | First scan | Rescan |
+|---|---|---|
+| strict | 21.6 | 21.7 |
+| objective / verified | 86.4 | 86.6 / 86.4 |
+| open issues | 16,962 | 16,806 |
+| Security dimension | 98.5% | 99.5% |
+
+New findings from the rescan:
+- **Dismissal persistence quirk**: 80 of the dismissed name-heuristics
+  reappeared with identical file/line/content but regenerated IDs, so the
+  earlier false-positive marks did not carry. Re-dismissed the 80. If they
+  return again on a future rescan, that is a desloppify state bug — file it at
+  github.com/peteromallet/desloppify.
+- **Remaining security (37, all low severity, none secrets)**: bandit warnings
+  in `scale-tests/unified_tests/scripts/` and cookiecutter hooks (`subprocess`
+  use, `/tmp` path, jinja2 autoescape, `os.system`), `log_sensitive` token-echo
+  pipelines in `local-dev.sh`, unguarded `JSON.parse` + `innerHTML` assignment
+  in `control-plane/frontend`.
+- **eslint still unavailable** (`tool_failed_no_output` even with v10
+  installed — likely needs a project-local config or compatible invocation).
+  **pmd unavailable** (needs Java, not installed). Both detectors remain
+  under-reported.
+- Test health unchanged at 39.4% — still the main mechanical drag (3,436
+  auto-fixable items); 20 subjective dimensions still unassessed (75% of
+  score weight).
