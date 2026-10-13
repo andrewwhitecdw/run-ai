@@ -22,7 +22,10 @@ after #2495 merges; drop the fork commit then.
 
 ## Fixed on fork branches, upstream PRs intentionally not opened yet
 
-User instruction (2026-10-13): keep these on the fork only for now. Each branch
+User instruction (2026-10-13): keep these on the fork only for now; max 5 open
+upstream PRs at a time (3 open as of 2026-10-13: #2495, #2496, #2497). When a
+slot frees, open in this order: (1) `docs/cruft-cleanup`, (2)
+`docs/service-readme-corrections`, (3) `docs/dev-docs-small-fixes`. Each branch
 is cut from upstream `main` and DCO-signed, ready to `gh pr create` on request.
 
 | Branch | Commit | Contents |
