@@ -145,7 +145,6 @@ To iterate on the control plane locally (rebuild CP only, reuse the cluster):
 | Target | Description |
 |--------|-------------|
 | `make test` | `test-ginkgo` — run the Ginkgo unit-test suites in the Go builder container |
-| `make coverage` | (from shared includes) open the HTML coverage report |
 
 Unit tests are written with Ginkgo/Gomega and run against the standard shared
 Go test tooling; there is no docker-compose integration-test suite in this

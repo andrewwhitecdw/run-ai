@@ -33,7 +33,7 @@ The API surface is described in [`swagger/source/openapi.yaml`](swagger/source/o
 ├── cmd/                        # Service entry point (main.go)
 ├── pkg/
 │   ├── authorization/          # Authorization helpers
-│   ├── client/                 # Versioned Go client (see pkg/client/README.md)
+│   ├── client/                 # Versioned Go client
 │   ├── clients/                # HTTP clients for upstream services
 │   ├── database/               # DAO layer and SQL migrations
 │   ├── services/               # Domain service implementations
@@ -106,7 +106,7 @@ Both `generated/` directories are produced by [OpenAPI Generator](https://openap
 
 ## Go client
 
-Other Run:ai services consume the BFF through the versioned Go client at [`pkg/client`](pkg/client). See [`pkg/client/README.md`](pkg/client/README.md) for:
+Other Run:ai services consume the BFF through the versioned Go client at [`pkg/client`](pkg/client):
 
 - How to import the versioned client package
 - How to create development and production version tags

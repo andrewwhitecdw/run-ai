@@ -50,7 +50,7 @@ The service is responsible for:
 
 ## Building and running
 
-Built with Go (see [`go.mod`](go.mod) — module `github.com/dsx-ai-factory/run-ai/runai-cluster/cluster/cluster-sync`, Go 1.26) and orchestrated through the [`Makefile`](Makefile), which includes `../../../build/makefile/runai-cluster.mk` and `index.mk`. Build/test targets run inside a golang Docker container.
+Built with Go (see [`go.mod`](go.mod) — module `github.com/dsx-ai-factory/run-ai/runai-cluster/cluster/cluster-sync`, Go 1.27) and orchestrated through the [`Makefile`](Makefile), which includes `../../../build/makefile/runai-cluster.mk` and `index.mk`. Build/test targets run inside a golang Docker container.
 
 | Target | Description |
 |--------|-------------|

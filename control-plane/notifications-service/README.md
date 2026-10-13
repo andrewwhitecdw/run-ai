@@ -62,7 +62,7 @@ The service is responsible for:
 
 ## Building and running
 
-Built with Go (see [`go.mod`](go.mod) — module `github.com/dsx-ai-factory/run-ai/control-plane/notifications-service`, Go 1.26) and orchestrated through the [`Makefile`](Makefile), which includes `../../build/makefile/control-plane.mk` and `index.mk`. **`make build` regenerates the OpenAPI server/client code first, then compiles both architectures** — the generated directories are a build product, not hand-written.
+Built with Go (see [`go.mod`](go.mod) — module `github.com/dsx-ai-factory/run-ai/control-plane/notifications-service`, Go 1.27) and orchestrated through the [`Makefile`](Makefile), which includes `../../build/makefile/control-plane.mk` and `index.mk`. **`make build` regenerates the OpenAPI server/client code first, then compiles both architectures** — the generated directories are a build product, not hand-written.
 
 | Target | Description |
 |--------|-------------|
