@@ -97,3 +97,71 @@ is cut from upstream `main` and DCO-signed, ready to `gh pr create` on request.
 - docs/ anchor findings assume Fern's current GitHub-style slugger (verified on Fern's live site 2026-10-13). Confirm any fix with `fern check` before a PR.
 - Repo AGENTS.md: do not proactively edit `docs/` — those rows need explicit user approval.
 - Helm charts changed → per repo rules run `helm dependency update` + `helm lint` + `helm template` on `control-plane/control-plane-chart`.
+
+
+---
+
+## Desloppify scan — 2026-10-13
+
+Command: `desloppify scan --path /home/andrewh/code/run-ai --by-language --no-badge`
+(languages scanned independently: go, java, javascript). State lives in
+`.desloppify/` + `scorecard.png` — both untracked locally, intentionally not
+committed. Findings recorded here; **no fixes applied**.
+
+### Headline scores
+
+| Score | Value | Note |
+|---|---|---|
+| overall / strict | **21.6/100** (target 85) | Misleadingly low — see below |
+| objective (mechanical only) | 86.4/100 | The real current state |
+| verified | 86.4/100 | |
+
+**Why strict is 21.6:** 75% of the score is subjective review, and all 20
+subjective dimensions are unassessed (scored 0) — `desloppify review --prepare`
+has never been run here. Mechanical health is ~86%. The low headline number is
+a "not reviewed" artifact, not evidence of terrible code.
+
+### Dimension health (open issues: 16,962; 15,862 files / 3.2M LOC)
+
+| Dimension | Health | Items | Tier | Action |
+|---|---|---|---|---|
+| Test health | **39.4%** | 63,716 checks | T4 | autofix ← biggest drag (3,436 fix items) |
+| Code quality | 93.7% | 14,851 | T3 | autofix |
+| Duplication | 94.0% | 54,537 | T3 | refactor |
+| File health | 96.5% | 7,036 | T3 | refactor |
+| Security | 98.5% | 9,400 | T4 | move |
+
+### Security flag (tool says "review before other cleanup")
+
+~276 open security issues, but the visible ones are `hardcoded_secret_name`
+heuristics — constant/variable *names* that mention secrets
+(`AssetSyncSecretDataKeyPassword`, `ngcAPIKeyEnvironmentVariable` in
+`control-plane/assets-service/pkg/...`), not leaked credential values. Likely
+mostly false positives; needs one triage pass (`desloppify show security`) to
+confirm before dismissing or fixing.
+
+### Structural debt by area (top)
+
+| Area | Items |
+|---|---|
+| runai-cluster/cluster | 3,183 |
+| control-plane/runai-cli | 1,796 |
+| control-plane/frontend | 1,228 |
+| control-plane/workloads | 1,156 |
+| control-plane/assets-service | 766 |
+| control-plane/cluster-service | 631 |
+| control-plane/identity-manager | 620 |
+| control-plane/authorization | 599 |
+
+### Tooling gaps (detectors under-reported this scan)
+
+- stylelint, pmd, eslint: tooling unavailable → those detectors produced nothing
+- Several detectors returned 0 marked "likely transient" (deprecated, naming,
+  smells, unused, etc.) — a rerun with tooling installed may add findings
+
+### Suggested next steps (per desloppify's own queue)
+
+1. `desloppify review --prepare` — 20 subjective dimensions (75% of score)
+2. Triage the 276 security findings (likely mass-dismiss as naming heuristics)
+3. Test health focus (39.4%) — 3,436 auto-fixable items
+4. Install stylelint/pmd/eslint and rescan for complete coverage
