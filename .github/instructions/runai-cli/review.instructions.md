@@ -67,8 +67,8 @@ github\.com/dsx-ai-factory/run-ai/.* v0\.0\.0-\d{8}
 // go.mod
 require (
     github.com/dsx-ai-factory/run-ai/runai-clients/workloads-manager-client v0.0.0-00010101000000-000000000000
-    github.com/dsx-ai-factory/run-ai/runai-clients/auth-client v0.0.0
-    github.com/dsx-ai-factory/run-ai/common/logging v0.0.0
+    github.com/dsx-ai-factory/run-ai/runai-clients/policy-service-client v0.0.0
+    github.com/dsx-ai-factory/run-ai/runai-common-packages/logging v0.0.0
 )
 ```
 
@@ -78,7 +78,7 @@ require (
 require (
     // DON'T use timestamp-based pseudo-versions
     github.com/dsx-ai-factory/run-ai/runai-clients/workloads-manager-client v0.0.0-20240102092130-5ac0b6a4141c
-    github.com/dsx-ai-factory/run-ai/runai-clients/auth-client v1.2.3
+    github.com/dsx-ai-factory/run-ai/runai-clients/policy-service-client v1.2.3
 )
 ```
 

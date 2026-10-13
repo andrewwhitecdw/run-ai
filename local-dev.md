@@ -1,6 +1,6 @@
 # local-dev.sh — Local Development Guide
 
-local-dev.sh spins up a complete, working NVIDIA Run:ai platform on your machine — control plane, cluster services, UI and Command-line interface (CLI). As such, you can develop and test against the real product instead of individual services in isolation. The script builds ~50 Go services from source, creates a self-contained [Kind](https://kind.sigs.k8s.io/) cluster, loads images directly into it via `kind load docker-image`, and deploys the full stack behind a self-signed TLS certificate. Everything runs locally — no external registry, no cloud cluster.
+local-dev.sh spins up a complete, working NVIDIA Run:ai platform on your machine — control plane, cluster services, UI and Command-line interface (CLI). As such, you can develop and test against the real product instead of individual services in isolation. The script builds over 40 Go services from source, creates a self-contained [Kind](https://kind.sigs.k8s.io/) cluster, loads images directly into it via `kind load docker-image`, and deploys the full stack behind a self-signed TLS certificate. Everything runs locally — no external registry, no cloud cluster.
 
 ---
 
@@ -10,8 +10,8 @@ local-dev.sh spins up a complete, working NVIDIA Run:ai platform on your machine
 |---|---|
 | **OS / Architecture** | `macOS` or `Linux`, `amd64` or `arm64` — the only four supported combinations. Any other platform, such as Windows, stops the script with a clear error before setup begins. |
 | **Container Runtime** | Use docker or podman. On Linux, enable the containerd image store. See more info on Podman settings for MacOS below. |
-| **Linux host: ≥ 4 CPUs, ≥ 16 GB RAM, ≥ 100 GB free disk** | Linux only. Kind nodes, ~50 services, and parallel builds all share the host directly, with no VM to size. Disk is measured where the container runtime stores data (usually `/var/lib/docker`). One full build leaves about 44 GB of caches: roughly 11 GB of Docker build cache, and 33 GB of Go module and build caches in `~/.cache`. It also needs about 8 GB of images, which are stored both in the registry and in the Kind nodes. The script warns at startup if the host is below any of these; it does not stop. On a tight host, use `--parallel 2` and `--skip-frontend`. |
-| **Podman VM ≥ 12 GB RAM** | macOS only. The full stack (NATS×3, PostgreSQL, Keycloak, ~50 services) requires at least 12 GB. With 8 GB the API server starves under QEMU overhead and the cluster never stabilises. Resize with `podman machine stop && podman machine set --memory 12288 && podman machine start`. |
+| **Linux host: ≥ 4 CPUs, ≥ 16 GB RAM, ≥ 100 GB free disk** | Linux only. Kind nodes, over 40 services, and parallel builds all share the host directly, with no VM to size. Disk is measured where the container runtime stores data (usually `/var/lib/docker`). One full build leaves about 44 GB of caches: roughly 11 GB of Docker build cache, and 33 GB of Go module and build caches in `~/.cache`. It also needs about 8 GB of images, which are stored both in the registry and in the Kind nodes. The script warns at startup if the host is below any of these; it does not stop. On a tight host, use `--parallel 2` and `--skip-frontend`. |
+| **Podman VM ≥ 12 GB RAM** | macOS only. The full stack (NATS×3, PostgreSQL, Keycloak, over 40 services) requires at least 12 GB. With 8 GB the API server starves under QEMU overhead and the cluster never stabilises. Resize with `podman machine stop && podman machine set --memory 12288 && podman machine start`. |
 | **`GITHUB_TOKEN`** | Only needed while the repo is private — Go builds pull modules from `github.com/run-ai/*`. Not required with `--skip-build` or once the repo is public. Set it before running: `export GITHUB_TOKEN=ghp_...` |
 | **`kind`, `kubectl`, `helm`** | Installed automatically if missing. `kind` is version-pinned (`v0.31.0`, node image `v1.32.5`); `kubectl` and `helm` always install the latest release. |
 | **`openssl`** | For TLS cert generation. Ships with macOS and most Linux distros; not auto-installed if missing. |
@@ -37,7 +37,7 @@ Go, Node, and Java are **not** needed on the host. Every Go, frontend, and Gradl
 
 3. **Open `https://runai.local`** and log in with the credentials printed at the end of the run.
 
-First run takes a while — it compiles ~50 Go services inside Docker containers. Subsequent runs with `--skip-build` are much faster.
+First run takes a while — it compiles over 40 Go services inside Docker containers. Subsequent runs with `--skip-build` are much faster.
 
 ---
 
@@ -90,15 +90,15 @@ Installs `kube-prometheus-stack` into the `monitoring` namespace — a minimal i
 - Labels every worker node with `run.ai/simulated-gpu-node-pool=default` — required for the chart's node-pool topology to recognize which nodes should simulate GPUs.
 - Skip with `--skip-fake-gpu`. Replaced by the real NVIDIA GPU Operator when `--gpu-operator` is set — see [Real GPUs](#real-gpus---gpu-operator).
 
-### Build — control-plane (25 Go Services + Frontend)
+### Build — control-plane (23 Go Services + Frontend)
 For each Go service, the script compiles an `amd64` binary inside a golang Docker container (workspace-mounted, uses the Go module cache at `~/.cache/go-build-docker-*`), builds a `linux/amd64` image, and **pushes it to the local registry**. Up to `--parallel N` services build concurrently.
 
 The frontend (React → nginx) runs `npm run build` inside a Node container, then builds and pushes the nginx image.
 
 Build logs land in `.local-dev/logs/<service>.log`.
 
-### Build — runai-cluster (25 Go Services + crd-upgrader)
-The same build pattern applies to the cluster-side controllers and operators. `runai-crd-upgrader` is the exception — no Go source, just packages `kubectl` + CRD manifests into a scratch image.
+### Build — runai-cluster (19 Go Services)
+The same build pattern applies to the cluster-side controllers and operators.
 
 ### Deploy — control-plane
 - Creates namespace `runai-backend` and loads the TLS cert as a Kubernetes secret.

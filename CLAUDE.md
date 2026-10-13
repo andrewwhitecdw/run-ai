@@ -71,6 +71,7 @@ service, run `/write-service-docs <path>` to document it and add it below.
 - [control-plane/metric-stores-migrator](control-plane/metric-stores-migrator)
 - [control-plane/metrics-service](control-plane/metrics-service)
 - [control-plane/notifications-proxy](control-plane/notifications-proxy)
+- [control-plane/notifications-service](control-plane/notifications-service)
 - [control-plane/org-unit-service](control-plane/org-unit-service)
 - [control-plane/policy-service](control-plane/policy-service)
 - [control-plane/secret-generator](control-plane/secret-generator)
@@ -92,7 +93,6 @@ service, run `/write-service-docs <path>` to document it and add it below.
 
 **control-plane** (tooling)
 - [control-plane/fielder](control-plane/fielder) — Python workload field-spec code generator
-- [control-plane/redoc](control-plane/redoc) — OpenAPI spec merge/publish pipeline
 
 **runai-cluster** (container)
 - [runai-cluster/cluster/accessrule-controller](runai-cluster/cluster/accessrule-controller)
@@ -104,7 +104,6 @@ service, run `/write-service-docs <path>` to document it and add it below.
 - [runai-cluster/cluster/cluster-api](runai-cluster/cluster/cluster-api)
 - [runai-cluster/cluster/cluster-sync](runai-cluster/cluster/cluster-sync)
 - [runai-cluster/cluster/external-workload-integrator](runai-cluster/cluster/external-workload-integrator)
-- [runai-cluster/cluster/git-sync](runai-cluster/cluster/git-sync)
 - [runai-cluster/cluster/go-operator](runai-cluster/cluster/go-operator)
 - [runai-cluster/cluster/goofys](runai-cluster/cluster/goofys)
 - [runai-cluster/cluster/helm-hooks-handler](runai-cluster/cluster/helm-hooks-handler)
@@ -115,7 +114,6 @@ service, run `/write-service-docs <path>` to document it and add it below.
 - [runai-cluster/cluster/runtime-rules](runai-cluster/cluster/runtime-rules)
 - [runai-cluster/cluster/shared-objects-controller](runai-cluster/cluster/shared-objects-controller)
 - [runai-cluster/cluster/status-updater](runai-cluster/cluster/status-updater)
-- [runai-cluster/cluster/valkey](runai-cluster/cluster/valkey)
 - [runai-cluster/cluster/workload-exporter](runai-cluster/cluster/workload-exporter)
 
 **runai-cluster** (helm)
@@ -166,7 +164,6 @@ service, run `/write-service-docs <path>` to document it and add it below.
 
 **runai-installer**
 - [runai-installer/installer](runai-installer/installer)
-- [runai-installer/provisioner-service](runai-installer/provisioner-service)
 
 **runai-mcp-server**
 - [runai-mcp-server](runai-mcp-server)

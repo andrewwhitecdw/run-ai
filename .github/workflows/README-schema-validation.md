@@ -137,7 +137,7 @@ The committed `values.schema.json` matches the generated schema.
 
 ### Environment Variables
 ```yaml
-GO_VERSION: "1.21"
+GO_VERSION: "1.24.6"
 SCHEMA_PATH: "runai-cluster/cluster/runai-chart/values.schema.json"
 SDK_PATH: "runai-cluster/cluster/sdk"
 ```

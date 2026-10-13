@@ -95,11 +95,6 @@ jobs:
 
       # Catches nav entries pointing at files that were moved, renamed, or never
       # migrated — which `fern check` does not validate (see docs/AGENTS.md:310).
-      #
-      # NON-BLOCKING FOR NOW: docs/reference/cli/runai/** (262 paths) was not
-      # carried over from run-ai/runai-docs during the monorepo migration, so
-      # this currently reports 263 missing. Flip to blocking (drop
-      # continue-on-error) once that gap is closed.
       - name: Check Fern nav paths resolve
         continue-on-error: false
         run: python3 ./tools/check-fern-nav.py fern
