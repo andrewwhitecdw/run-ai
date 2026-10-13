@@ -109,7 +109,7 @@ See [internal/tools/README.md](internal/tools/README.md) for the tool-authoring 
 make build
 
 # Docker images
-make docker DOCKER_TAG=1.0.0
+make docker-build DOCKER_TAG=1.0.0
 ```
 
 ## Docker
